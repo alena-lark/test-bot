@@ -29,4 +29,4 @@ pyTelegramBotAPI (https://github.com/eternnoir/pyTelegramBotAPI)
 
 * if you try to delete task 3 again
 
-![](https://sun9-6.userapi.com/DhhFsbVtL5yvJlpFx0tuSQZULPT21xEFh5LHIA/dEGL8IdMKhQ.jpg)
+![](https://sun9-58.userapi.com/hCiiw2j-dW-17bdGM9iQUNmmdH2OSyVU6oMoyg/9bLHrAnnZCo.jpg)
