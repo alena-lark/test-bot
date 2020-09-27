@@ -2,31 +2,60 @@
 
 # define bot and tasks
 import telebot
+from telebot import types
 
-token = '.,..>' # your token
+token = '<your token here>' # your token
 bot = telebot.TeleBot(token)
 tasks = []
 
 # start
 @bot.message_handler(commands=['start'])
 def welcome(message):
-    sti = open('<...>/cat.webp', 'rb') # your path
-    bot.send_sticker(message.chat.id, sti)    
+    sticker = open('cat.webp', 'rb') # your path to sticker
+    bot.send_sticker(message.chat.id, sticker)    
     bot.send_message(message.chat.id, 'Hello, my friend!\nThis is your test ToDo List in telegtam.\nLet`s go!')
-    
-# main code
+
+#main code
 @bot.message_handler(content_types=['text'])
 def item(message):
-    if 'delete' in message.text.strip().lower().split():
-        try:
-            num = int(message.text.strip().split()[1]) - 1
-            tasks.pop(num)
-            bot.send_message(message.chat.id, 'Just Do It!\n'+'\n'.join(str(i+1) + ') ' + task for i,task in enumerate(tasks)))
-        except (IndexError, ValueError):
-            bot.send_message(message.chat.id, 'Something is wrong 😅\nTry again, please 😇')
-    else:
-        tasks.append(message.text)
-        bot.send_message(message.chat.id, 'Just Do It!\n'+'\n'.join(str(i+1) + ') ' + task for i,task in enumerate(tasks)))
+    tasks.append(message.text)
+    
+    #inline keyboard
+    markup = types.InlineKeyboardMarkup(row_width=1)
+    for task in tasks:
+        markup.add(types.InlineKeyboardButton(f'{task}', callback_data=f'{task}'))
+    
+    bot.send_message(message.chat.id, 'Just do it!', reply_markup=markup)
+    
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    try:
+        tasks.remove(call.data)
+        
+        #inline keyboard
+        markup = types.InlineKeyboardMarkup(row_width=1)
+        for task in tasks:
+            markup.add(types.InlineKeyboardButton(f'{task}', callback_data=f'{task}'))
+
+        bot.send_message(call.message.chat.id, 'One task is deleted!\n\nJust do it!', reply_markup=markup)
+    
+    except (IndexError, ValueError):
+        bot.send_message(call.message.chat.id, 'Something is wrong 😅\nTry again, please 😇')
 
 #runing
 bot.polling(none_stop=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
