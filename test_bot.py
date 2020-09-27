@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 
-
 # define bot and tasks
 import telebot
 
-token = '<your tiken here>'
+token = '.,..>' # your token
 bot = telebot.TeleBot(token)
 tasks = []
 
 # start
 @bot.message_handler(commands=['start'])
 def welcome(message):
-    sti = open('cat.webp', 'rb')
+    sti = open('<...>/cat.webp', 'rb') # your path
     bot.send_sticker(message.chat.id, sti)    
     bot.send_message(message.chat.id, 'Hello, my friend!\nThis is your test ToDo List in telegtam.\nLet`s go!')
     
