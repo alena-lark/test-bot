@@ -1,4 +1,3 @@
-# test-bot
 # <p align="center">My first simple bot for Telegram - ToDo List
 
 ### To use the code install Python library:
