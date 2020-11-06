@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+'''
+This is test telegram-bot
+'''
 
 # define bot and tasks
 import telebot
@@ -11,7 +13,7 @@ tasks = []
 # start
 @bot.message_handler(commands=['start'])
 def welcome(message):
-    sticker = open('cat.webp', 'rb') # your path to sticker
+    sticker = open('<your sticker name>.webp', 'rb') # your path to sticker
     bot.send_sticker(message.chat.id, sticker)    
     bot.send_message(message.chat.id, 'Hello, my friend!\nThis is your test ToDo List in telegtam.\nLet`s go!')
 
